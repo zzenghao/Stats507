@@ -38,13 +38,13 @@ def appendDf(df1, df2, Str_, time_):
 
 
 
-demograStr=["SEQN", "RIDAGEYR", "RIDRETH3", "DMDEDUC2", "DMDMARTL", 
+demograStr=["SEQN", "RIAGENDR", "RIDAGEYR", "RIDRETH3", "DMDEDUC2", "DMDMARTL", 
             "RIDSTATR", "SDMVPSU", "SDMVSTRA", "WTMEC2YR", "WTINT2YR"]
-demograColStr=["id number", "age", "race", "education level", "marital", 
+demograColStr=["id number","gender", "age", "race", "education level", "marital", 
                 "interview status", "masked variance pseudo psu", 
                 "masked variance pseudo stratum", "two year mec weight", 
                 "two year interviewed weight", "time"]
-demograColType=[int, int, int, int, int, int, int, int, float, float, str]
+demograColType=[int, int, int, int, int, int, int, int, int, float, float, str]
 demograDfColType=dict(zip(demograColStr,demograColType))
 
 demograDf=pd.DataFrame()
