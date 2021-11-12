@@ -313,12 +313,12 @@ def appendDf(df1, df2, Str_, time_):
 
 demograStr=["SEQN", "RIDAGEYR", "RIDRETH3", "DMDEDUC2", "DMDMARTL", 
             "RIDSTATR", "SDMVPSU", "SDMVSTRA", "WTMEC2YR", "WTINT2YR"]
-demograColStr=["id number", "age", "race", "education level", "marital", 
+demo_str=["id number", "age", "race", "education level", "marital", 
                 "interview status", "masked variance pseudo psu", 
                 "masked variance pseudo stratum", "two year mec weight", 
                 "two year interviewed weight", "time"]
-demograColType=[int, int, int, int, int, int, int, int, float, float, str]
-demograDfColType=dict(zip(demograColStr,demograColType))
+demo_type=[int, int, int, int, int, int, int, int, float, float, str]
+demo_ctype=dict(zip(demo_str,demo_type))
 
 demograDf=pd.DataFrame()
 
@@ -341,8 +341,8 @@ demograDf=appendDf(demograDf,df2017_2018,demograStr,"2017-2018")
 
 
 demograDf.fillna(-1,inplace= True) # replace all the nan to -1
-demograDf.columns=demograColStr  # rename the colume
-demograDf=demograDf.astype(demograDfColType)  # set the data tpye of column
+demograDf.columns=demo_str  # rename the colume
+demograDf=demograDf.astype(demo_ctype)  # set the data tpye of column
 
 demograDf.to_pickle("./demograDf.pkl")
 print("cases in demographic data")
@@ -352,46 +352,46 @@ print(len(demograDf.index))
 
 
 
-toothCount=["OHX"+str(x+1).zfill(2)+"TC" for x in range(32)]
+tooth_count=["OHX"+str(x+1).zfill(2)+"TC" for x in range(32)]
 corCavi=["OHX"+str(x+2).zfill(2)+"CTC" for x in range(30)
           if x!=14 and x!=15]
 
-oralHealStr=["SEQN", "OHDDESTS"]+toothCount+corCavi
+oh_cstr=["SEQN", "OHDDESTS"]+tooth_count+corCavi
 
-toothCountStr=["Tooth Count: #"+str(x+1) for x in range(32)]
+tooth_cStr=["Tooth Count: #"+str(x+1) for x in range(32)]
 corCaviStr=["Coronal Caries: Tooth Count #"+str(x+2) for x in range(30)
             if x!=14 and x!=15]
 
 
-oralHealColStr=["id number", "status code"]+toothCountStr+corCaviStr+["time"]
+oh_str=["id number", "status code"]+tooth_cStr+corCaviStr+["time"]
 
 
-oralHealColType=[int for x in range(2+32)]+[str for x in range(29-1)]
-oralHealDfColType=dict(zip(oralHealColStr,oralHealColType))
+oh_type=[int for x in range(2+32)]+[str for x in range(29-1)]
+oralHealDfColType=dict(zip(oh_str,oh_type))
 
 oralHealDf=pd.DataFrame()
 
 df2011_2012=pd.read_sas(
     "https://wwwn.cdc.gov/Nchs/Nhanes/2011-2012/OHXDEN_G.XPT")
-oralHealDf=appendDf(oralHealDf,df2011_2012,oralHealStr,"2011-2012")
+oralHealDf=appendDf(oralHealDf,df2011_2012,oh_cstr,"2011-2012")
 
 df2013_2014=pd.read_sas(
     "https://wwwn.cdc.gov/Nchs/Nhanes/2013-2014/OHXDEN_H.XPT")
-oralHealDf=appendDf(oralHealDf,df2013_2014,oralHealStr,"2013-2014")
+oralHealDf=appendDf(oralHealDf,df2013_2014,oh_cstr,"2013-2014")
 
 df2015_2016=pd.read_sas(
     "https://wwwn.cdc.gov/Nchs/Nhanes/2015-2016/OHXDEN_I.XPT")
-oralHealDf=appendDf(oralHealDf,df2015_2016,oralHealStr,"2015-2016")
+oralHealDf=appendDf(oralHealDf,df2015_2016,oh_cstr,"2015-2016")
 
 
 df2017_2018=pd.read_sas(
     "https://wwwn.cdc.gov/Nchs/Nhanes/2017-2018/OHXDEN_J.XPT")
-oralHealDf=appendDf(oralHealDf,df2017_2018,oralHealStr,"2017-2018")
+oralHealDf=appendDf(oralHealDf,df2017_2018,oh_cstr,"2017-2018")
 
 
 
 oralHealDf.fillna(-1,inplace= True) # replace all the nan to -1
-oralHealDf.columns=oralHealColStr  # rename the colume
+oralHealDf.columns=oh_str  # rename the colume
 
 
 for i in corCaviStr:
