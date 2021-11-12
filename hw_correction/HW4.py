@@ -255,17 +255,25 @@ print(d_data_tab)
 result=stats.ttest_ind(df_exam.groupby("ohx_status").get_group("complete")\
         ["age"],df_exam.groupby("ohx_status").get_group("missing")["age"])
 print("p-value testing for a mean difference in age")
-print('%.2e'%result.pvalue)
+p=result.pvalue
+if p<0.001: pp="p<0.001"
+print(pp)
 
 print("p-value of Chi-square test for gender from oral test complete\
 missing")
-print('%.2e'%stats.chi2_contingency(d_data.loc["gender"])[1])
+p=stats.chi2_contingency(d_data.loc["gender"])[1]
+if p<0.001: pp="p<0.001"
+print(pp)
 print("p-value of Chi-square test for age under 20 from oral test complete\
 missing")
-print('%.2e'%stats.chi2_contingency(d_data.loc["age20"])[1])
+p=stats.chi2_contingency(d_data.loc["age20"])[1]
+if p<0.001: pp="p<0.001"
+print(pp)
 print("p-value of Chi-square test for college from oral test complete\
 missing")
-print('%.2e'%stats.chi2_contingency(d_data.loc["college"])[1])
+p=stats.chi2_contingency(d_data.loc["college"])[1]
+if p<0.001: pp="p<0.001"
+print(pp)
 # -
 
 # ## Question 2
